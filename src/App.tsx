@@ -1,7 +1,11 @@
 import type { FC } from "react";
 
 const App: FC = () => {
-    return <>Matraslar</>;
+    return (
+        <>
+            Matraslar <p>salom</p>
+        </>
+    );
 };
 
 export default App;
