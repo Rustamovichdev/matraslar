@@ -1,26 +1,88 @@
-import type { FC } from "react";
-import MenuBar from "../components/menuBar";
+// layouts/MainLayout.tsx
+import React from "react";
+import { Layout, Menu, theme } from "antd";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import HeaderSide from "../components/headerSide";
-import { Outlet } from "react-router-dom";
+import "./index.css";
+import { menuData } from "../constants/menudata";
 
-const App: FC = () => {
+const { Content, Footer, Sider } = Layout;
+
+const MainLayout: React.FC = () => {
+    const {
+        token: { colorBgContainer, borderRadiusLG },
+    } = theme.useToken();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const currentYear = new Date().getFullYear();
+
+    // Joriy path ga mos key topish
+    const getSelectedKey = (): string => {
+        const found = menuData.find((item) =>
+            location.pathname.startsWith(item.path),
+        );
+        return found ? found.key : "1";
+    };
+
+    const handleMenuClick = ({ key }: { key: string }) => {
+        const found = menuData.find((item) => item.key === key);
+        if (found) navigate(found.path);
+    };
+
     return (
-        <>
-            <section>
-                <div className='menu'>
-                    <div>logo</div>
-                    <MenuBar />
+        <Layout style={{ height: "100vh" }}>
+            <Sider
+                breakpoint='lg'
+                collapsedWidth='0'
+                onBreakpoint={(broken) => {
+                    console.log("Breakpoint:", broken);
+                }}
+                onCollapse={(collapsed, type) => {
+                    console.log("Collapse:", collapsed, type);
+                }}
+            >
+                {/* Logo */}
+                <div className='logo'>
+                    <img src='/logo.png' alt='Logo' />
                 </div>
 
-                <div className='main'>
-                    <HeaderSide />
+                {/* Menu */}
+                <Menu
+                    theme='dark'
+                    mode='inline'
+                    selectedKeys={[getSelectedKey()]}
+                    items={menuData.map(({ key, icon: Icon, label }) => ({
+                        key,
+                        icon: <Icon />,
+                        label,
+                    }))}
+                    onClick={handleMenuClick}
+                />
+            </Sider>
 
-                    <div>
+            <Layout>
+                <HeaderSide />
+
+                <Content style={{ margin: "24px 16px 0", overflow: "auto" }}>
+                    <div
+                        style={{
+                            padding: 24,
+                            minHeight: 360,
+                            background: colorBgContainer,
+                            borderRadius: borderRadiusLG,
+                        }}
+                    >
                         <Outlet />
                     </div>
-                </div>
-            </section>
-        </>
+                </Content>
+
+                <Footer style={{ textAlign: "center" }}>
+                     ©{currentYear} — Barcha huquqlar himoyalangan
+                </Footer>
+            </Layout>
+        </Layout>
     );
 };
-export default App;
+
+export default MainLayout;
