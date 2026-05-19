@@ -73,4 +73,46 @@ export const Icons = {
             </g>
         </svg>
     ),
+    editBtn: (props: SVGProps<SVGSVGElement>) => (
+        <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            {...props}
+            width={20}
+            height={20}
+        >
+            <g clipPath='url(#a)'>
+                <path
+                    fill='#000'
+                    d='M2.625 15.277v2.66c0 .245.192.438.438.438h2.66a.41.41 0 0 0 .306-.131l9.555-9.547-3.281-3.28-9.547 9.546a.43.43 0 0 0-.131.315ZM18.121 6.16a.871.871 0 0 0 0-1.234L16.074 2.88a.871.871 0 0 0-1.234 0L13.239 4.48l3.281 3.281 1.601-1.601Z'
+                />
+            </g>
+            <defs>
+                <clipPath id='a'>
+                    <path fill='#fff' d='M0 0h21v21H0z' />
+                </clipPath>
+            </defs>
+        </svg>
+    ),
+    deleteBtn: (props: SVGProps<SVGSVGElement>) => (
+        <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            {...props}
+            width={20}
+            height={20}
+        >
+            <g clipPath='url(#a)'>
+                <path
+                    fill='#D61F1F'
+                    d='M5.25 14.625c0 .963.787 1.75 1.75 1.75h7c.963 0 1.75-.787 1.75-1.75v-8.75c0-.963-.787-1.75-1.75-1.75H7c-.963 0-1.75.787-1.75 1.75v8.75ZM15.75 1.5h-2.188l-.62-.621a.882.882 0 0 0-.613-.254H8.67a.883.883 0 0 0-.612.254l-.621.621H5.25a.878.878 0 0 0-.875.875c0 .481.394.875.875.875h10.5a.878.878 0 0 0 .875-.875.878.878 0 0 0-.875-.875Z'
+                />
+            </g>
+            <defs>
+                <clipPath id='a'>
+                    <path fill='#fff' d='M0 0h21v21H0z' />
+                </clipPath>
+            </defs>
+        </svg>
+    ),
 };

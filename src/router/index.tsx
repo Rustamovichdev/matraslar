@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../layout";
-import { CustomersPage, OrdersPage } from "../pages";
+import { Category, CustomersPage, OrdersPage } from "../pages";
 
 export const router = createBrowserRouter([
     {
@@ -14,6 +14,10 @@ export const router = createBrowserRouter([
             {
                 path: "/customers",
                 element: <CustomersPage />,
+            },
+            {
+                path: "/categories",
+                element: <Category />,
             },
         ],
     },
