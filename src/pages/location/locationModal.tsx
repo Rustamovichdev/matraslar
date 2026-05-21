@@ -75,13 +75,14 @@ const LocationModal: FC<PropsLocationModal> = ({ open, setOpen }) => {
                     }}
                 >
                     {/* Image Upload Section (Eng chapda) */}
-                    <div style={{ width: "250px", height: "250px"}}>
+                    <div style={{ width: "200px", height: "250px"}}>
                         <Form.Item label='Rasmlar'>
                             <Upload
                                 action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                                 listType='picture-card'
                                 multiple
                                 maxCount={3}
+                                
                             >
                                 <div
                                     style={{
