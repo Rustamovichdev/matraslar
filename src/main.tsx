@@ -5,6 +5,8 @@ import AuthProvider from "./context/authContext";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 
+import "antd/dist/reset.css";
+
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <AuthProvider>
