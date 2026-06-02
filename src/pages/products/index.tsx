@@ -35,10 +35,10 @@ const ProductsPage = () => {
         {
             title: "Action",
             render: (_: any, record: any) => (
-                <div className='flex gap-2'>
-                    <Button type='primary'>✏️</Button>
+                <div className='flex gap-2' style={{display:"flex", gap:"10px"}}>
+                    <Button type='primary' style={{background:"#e6ebed"}}>✏️</Button>
 
-                    <Button danger>🗑️</Button>
+                    <Button danger style={{background:"#fbe9e9"}}>🗑️</Button>
                 </div>
             ),
         },
