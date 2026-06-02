@@ -35,10 +35,17 @@ const ProductsPage = () => {
         {
             title: "Action",
             render: (_: any, record: any) => (
-                <div className='flex gap-2' style={{display:"flex", gap:"10px"}}>
-                    <Button type='primary' style={{background:"#e6ebed"}}>✏️</Button>
+                <div
+                    className='flex gap-2'
+                    style={{ display: "flex", gap: "10px" }}
+                >
+                    <Button type='primary' style={{ background: "#e6ebed" }}>
+                        ✏️
+                    </Button>
 
-                    <Button danger style={{background:"#fbe9e9"}}>🗑️</Button>
+                    <Button danger style={{ background: "#fbe9e9" }}>
+                        🗑️
+                    </Button>
                 </div>
             ),
         },
@@ -51,6 +58,7 @@ const ProductsPage = () => {
                 dataSource={products}
                 rowKey='id'
                 pagination={false}
+                scroll={{ x: "max-content" }}
             />
 
             <div className='flex justify-end mt-5'>

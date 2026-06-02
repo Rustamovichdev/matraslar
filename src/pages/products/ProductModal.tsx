@@ -33,25 +33,22 @@ const ProductModal = ({ open, onClose }: Props) => {
             onCancel={onClose}
             footer={null}
             width={1000}
+            style={{ maxWidth: "95vw" }}
             centered
             title={<Typography.Title level={4}>QO'SHISH</Typography.Title>}
         >
             <Form form={form} layout='vertical' onFinish={onFinish}>
-                <Row gutter={20}>
+                <Row gutter={[20, 20]}>
                     {/* CHAP QISM: Rasm yuklash */}
-                    <Col>
+                    <Col xs={24} md={12} lg={6}>
                         <Form.Item label='Rasm' name='image'>
                             <Upload
-                                style={{
-                                    width: 230,
-                                    height: 230,
-                                }}
                                 listType='picture-card'
                                 showUploadList={false}
                             >
                                 <div
                                     style={{
-                                        width: 230,
+                                        width: "100%",
                                         height: 230,
                                         display: "flex",
                                         flexDirection: "column",
@@ -68,7 +65,7 @@ const ProductModal = ({ open, onClose }: Props) => {
                         </Form.Item>
                     </Col>
 
-                    <Col flex={1}>
+                    <Col xs={24} md={12} lg={6}>
                         <Form.Item label='Kategoriya' name='category'>
                             <Select
                                 size='large'
@@ -110,7 +107,7 @@ const ProductModal = ({ open, onClose }: Props) => {
                         </Form.Item>
                     </Col>
 
-                    <Col flex={1}>
+                    <Col xs={24} md={12} lg={6}>
                         <Form.Item
                             label='Razmeri'
                             name='size'
@@ -157,11 +154,11 @@ const ProductModal = ({ open, onClose }: Props) => {
                         </Form.Item>
                     </Col>
 
-                    <Col flex={1}>
+                    <Col xs={24} md={12} lg={6}>
                         <Form.Item label="Ma'lumot" name='description'>
                             <Input.TextArea
                                 style={{
-                                    width: 220,
+                                    width: "100%",
                                     height: 154,
                                     resize: "none",
                                 }}
@@ -171,7 +168,7 @@ const ProductModal = ({ open, onClose }: Props) => {
 
                         <div
                             className='flex flex-col gap-4 mt-2'
-                            style={{ width: 220 }}
+                            style={{ width: "100%" }}
                         >
                             <div
                                 className='divvv'
@@ -211,12 +208,12 @@ const ProductModal = ({ open, onClose }: Props) => {
 
                             <Button
                                 style={{
-                                    width: 220,
+                                    width: "100%",
                                     height: 45,
                                     marginTop: "20px",
                                 }}
                                 type='primary'
-                                className='w-[220px] h-[45px] mt-4'
+                                className='mt-4'
                                 onClick={() => form.submit()}
                             >
                                 Qo'shish
