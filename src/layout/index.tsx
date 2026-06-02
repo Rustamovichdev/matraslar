@@ -43,12 +43,21 @@ const MainLayout: React.FC = () => {
                 }}
             >
                 {/* Logo */}
-                <div className='logo'>
-                    <img src='/logo.png' alt='Logo' />
+                <div className='logo' style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor:"#01384D",
+                    
+                }}>
+                    <img src="/public/logo.png" alt="" />
                 </div>
 
                 {/* Menu */}
                 <Menu
+                    style={{
+                        backgroundColor:"#01384D"
+                    }}
                     theme='dark'
                     mode='inline'
                     selectedKeys={[getSelectedKey()]}

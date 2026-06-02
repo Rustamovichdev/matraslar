@@ -1,66 +1,61 @@
-import { useState } from "react";
-import { Table, Button, Switch } from "antd";
-
-import { products } from "./data";
+import { Button, Table, type TableColumnsType } from "antd";
+import { useState, type FC } from "react";
+import { Icons } from "../../constants/icons";
 import ProductModal from "./ProductModal";
 
-const ProductsPage = () => {
-    const [open, setOpen] = useState(false);
+const ProductsPage: FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const columns = [
+    // Mahsulotlar uchun ma'lumotlar (bo'sh holatda)
+    const data: any[] = [];
+
+    const columns: TableColumnsType<any> = [
         {
-            title: "Mahsulot nomlari",
+            title: "Nomi",
             dataIndex: "name",
-        },
-        {
-            title: "Toifalar",
-            dataIndex: "category",
+            key: "name",
         },
         {
             title: "Narxi",
             dataIndex: "price",
+            key: "price",
         },
         {
-            title: "Yuklama",
-            dataIndex: "weight",
-        },
-        {
-            title: "Razmeri",
-            dataIndex: "size",
-        },
-        {
-            title: "Status",
-            render: (_: any, record: any) => <Switch checked={record.active} />,
+            title: "Brend",
+            dataIndex: "brand",
+            key: "brand",
         },
         {
             title: "Action",
-            render: (_: any, record: any) => (
-                <div className='flex gap-2'>
-                    <Button type='primary'>✏️</Button>
-
-                    <Button danger>🗑️</Button>
+            key: "action",
+            render: () => (
+                <div className='grBtns'>
+                    <button>
+                        <Icons.editBtn />
+                    </button>
+                    <button>
+                        <Icons.deleteBtn />
+                    </button>
                 </div>
             ),
         },
     ];
 
     return (
-        <div className='p-5'>
-            <Table
-                columns={columns}
-                dataSource={products}
-                rowKey='id'
-                pagination={false}
-            />
-
-            <div className='flex justify-end mt-5'>
-                <Button type='primary' onClick={() => setOpen(true)}>
+        <section>
+            <div className='section_top'>
+                <Button type='primary' onClick={() => setIsModalOpen(true)}>
                     Qo'shish
                 </Button>
             </div>
 
-            <ProductModal open={open} onClose={() => setOpen(false)} />
-        </div>
+            <Table columns={columns} dataSource={data} rowKey='id' />
+
+            <ProductModal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
+        </section>
     );
 };
 

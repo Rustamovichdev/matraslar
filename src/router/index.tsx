@@ -6,6 +6,7 @@ import {
     LocationPage,
     OrdersPage,
     ProductsPage,
+    TechnologyPage,
 } from "../pages";
 
 export const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             {
                 path: "/products",
                 element: <ProductsPage />,
+            },
+            {
+                path: "/technology",
+                element: <TechnologyPage />,
             },
         ],
     },
