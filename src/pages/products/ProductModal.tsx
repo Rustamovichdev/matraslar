@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Modal,
     Form,
@@ -16,10 +17,21 @@ import { UploadOutlined } from "@ant-design/icons";
 interface Props {
     open: boolean;
     onClose: () => void;
+    editingProduct?: any;
 }
 
-const ProductModal = ({ open, onClose }: Props) => {
+const ProductModal = ({ open, onClose, editingProduct }: Props) => {
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        if (open) {
+            if (editingProduct) {
+                form.setFieldsValue(editingProduct);
+            } else {
+                form.resetFields();
+            }
+        }
+    }, [open, editingProduct, form]);
 
     const onFinish = (values: any) => {
         console.log("Mahsulot ma'lumotlari: ", values);
@@ -34,18 +46,22 @@ const ProductModal = ({ open, onClose }: Props) => {
             footer={null}
             width={1000}
             centered
-            title={<Typography.Title level={4}>QO'SHISH</Typography.Title>}
+            title={
+                <Typography.Title level={4}>
+                    {editingProduct ? "TAHRIRLASH" : "QO'SHISH"}
+                </Typography.Title>
+            }
         >
             <Form form={form} layout='vertical' onFinish={onFinish}>
                 <Row gutter={20}>
                     {/* CHAP QISM: Rasm yuklash */}
                     <Col>
                         <Form.Item label='Rasm' name='image'>
-                <Upload
-                  style={{
-                               width: 230,
-                               height: 230,
-                  }}
+                            <Upload
+                                style={{
+                                    width: 230,
+                                    height: 230,
+                                }}
                                 listType='picture-card'
                                 showUploadList={false}
                             >
@@ -68,7 +84,6 @@ const ProductModal = ({ open, onClose }: Props) => {
                         </Form.Item>
                     </Col>
 
-                    {/* O'RTA QISM 1: 4 ta Input */}
                     <Col flex={1}>
                         <Form.Item label='Kategoriya' name='category'>
                             <Select
@@ -88,7 +103,15 @@ const ProductModal = ({ open, onClose }: Props) => {
                             />
                         </Form.Item>
 
-                        <Form.Item label='Narxi' name='price'>
+                        <Form.Item
+                            label='Narxi'
+                            name='price'
+                            normalize={(value) =>
+                                value
+                                    .replace(/[^0-9-]/g, "")
+                                    .replace(/(?!^)-/g, "")
+                            }
+                        >
                             <Input
                                 size='large'
                                 placeholder='Narxini kiriting'
@@ -103,12 +126,31 @@ const ProductModal = ({ open, onClose }: Props) => {
                         </Form.Item>
                     </Col>
 
-                    {/* O'RTA QISM 2: Yana 4 ta Input */}
                     <Col flex={1}>
-                        <Form.Item label='Razmeri' name='size'>
+                        <Form.Item
+                            label='Razmeri'
+                            name='size'
+                            normalize={(value) => {
+                                if (!value) return value;
+                                const numbersOnly = value.replace(/\D/g, "");
+
+                                const parts = [];
+                                if (numbersOnly.length > 0) {
+                                    parts.push(numbersOnly.substring(0, 3));
+                                }
+                                if (numbersOnly.length > 3) {
+                                    parts.push(numbersOnly.substring(3, 6));
+                                }
+                                if (numbersOnly.length > 6) {
+                                    parts.push(numbersOnly.substring(6, 8));
+                                }
+                                return parts.join(" x ");
+                            }}
+                        >
                             <Input
                                 size='large'
-                                placeholder='Razmerini kiriting'
+                                placeholder='200 x 134 x 40'
+                                maxLength={14}
                             />
                         </Form.Item>
 
@@ -131,7 +173,6 @@ const ProductModal = ({ open, onClose }: Props) => {
                         </Form.Item>
                     </Col>
 
-                    {/* O'NG QISM: TextArea va Switchlar */}
                     <Col flex={1}>
                         <Form.Item label="Ma'lumot" name='description'>
                             <Input.TextArea
@@ -148,12 +189,15 @@ const ProductModal = ({ open, onClose }: Props) => {
                             className='flex flex-col gap-4 mt-2'
                             style={{ width: 220 }}
                         >
-                <div className='divvv' style={{
-                              display: "flex",
-                              alignItems: "center",
-                  justifyContent: "space-between",
-                              marginBlock: "30px",
-                            }}>
+                            <div
+                                className='divvv'
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    marginBlock: "30px",
+                                }}
+                            >
                                 <span className='navinla'>Navinka</span>
                                 <Form.Item
                                     name='isNew'
@@ -163,11 +207,14 @@ const ProductModal = ({ open, onClose }: Props) => {
                                     <Switch />
                                 </Form.Item>
                             </div>
-                <div className='divvv' style={{
-                               display: "flex",
-                              alignItems: "center",
-                              justifyContent: "space-between",
-                            }}>
+                            <div
+                                className='divvv'
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                }}
+                            >
                                 <span className='active'>Active</span>
                                 <Form.Item
                                     name='isActive'
@@ -178,16 +225,17 @@ const ProductModal = ({ open, onClose }: Props) => {
                                 </Form.Item>
                             </div>
 
-                <Button style={{
-                              width: 220,
-                  height: 45,
-                              marginTop: "20px",
-                            }}
+                            <Button
+                                style={{
+                                    width: 220,
+                                    height: 45,
+                                    marginTop: "20px",
+                                }}
                                 type='primary'
                                 className='w-[220px] h-[45px] mt-4'
                                 onClick={() => form.submit()}
                             >
-                                Qo'shish
+                                {editingProduct ? "Saqlash" : "Qo'shish"}
                             </Button>
                         </div>
                     </Col>
