@@ -45,7 +45,7 @@ export const menuData: MenuItemType[] = [
         key: "6",
         icon: CloudSyncOutlined,
         label: "Texnologiyalar",
-        path: "/technologies",
+        path: "/technology",
     },
     {
         key: "7",

@@ -78,6 +78,13 @@ const LocationModal: FC<PropsLocationModal> = ({ open, setOpen }) => {
                     <div style={{ width: "200px", height: "250px"}}>
                         <Form.Item label='Rasmlar'>
                             <Upload
+                                style={{
+                                    width: "250px",
+                                    height: "250px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
                                 action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                                 listType='picture-card'
                                 multiple

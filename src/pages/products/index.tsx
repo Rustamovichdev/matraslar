@@ -44,7 +44,7 @@ const ProductsPage = () => {
         },
         {
             title: "Toifalar",
-            dataIndex: "category_id",
+            dataIndex: "category",
         },
         {
             title: "Narxi",
@@ -52,7 +52,7 @@ const ProductsPage = () => {
         },
         {
             title: "Yuklama",
-            dataIndex: "weight_loading",
+            dataIndex: "weight",
         },
         {
             title: "Razmeri",
@@ -60,7 +60,7 @@ const ProductsPage = () => {
         },
         {
             title: "Status",
-            render: (_: any, record: any) => <Switch checked={record.is_active} />,
+            render: (_: any, record: any) => <Switch checked={record.active} />,
         },
         {
             title: "Action",
